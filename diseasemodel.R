@@ -41,7 +41,7 @@ SIR.model <- function(t, b, g, savepath){
   print(res)
   ggsave(plot=res,
          filename=paste0("output.png"),
-         width=8,height=6,dpi=180,path=savepath)
+         width=6,height=5,unit="in",dpi=180,path=savepath)
   getwd()}
 
 args <- commandArgs(TRUE)
