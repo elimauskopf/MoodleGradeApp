@@ -6,12 +6,11 @@ import javax.swing.*;
 
 public class ImageToWindow 
 {
-    static void run() throws IOException 
+    static void run(String time, String beta, String gamma) throws IOException, InterruptedException 
     {
-        String path = "/Users/sigwardp/Desktop/qyj72mmtmewz.jpg";
-        File file = new File(path);
-        BufferedImage image = ImageIO.read(file);
-        JLabel label = new JLabel(new ImageIcon(image));
+        DiseaseSimulation d = new DiseaseSimulation(Integer.parseInt(time),Double.parseDouble(beta),Double.parseDouble(gamma));
+        d.runSim();
+        JLabel label = d.getGraph();
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.getContentPane().add(label);

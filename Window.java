@@ -56,8 +56,11 @@ public class Window
                 var2 = textField2.getText(); 
                 var3 = textField3.getText(); 
                 try {
-					ImageToWindow.run();
+					ImageToWindow.run(var1,var2,var3);
 				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
