@@ -30,13 +30,13 @@ public class DiseaseSimulation {
 		builder.redirectErrorStream(true);
 		Process p = builder.start();
 		File f = new File(address + "/output.png");
-		while(!f.exists()) { 
+		/*while(!f.exists()) { 
 		    Thread.sleep(1);
-		}
+		}*/
+		Thread.sleep(5000);
 	}
 
 	public JLabel getGraph() throws IOException {
-		//JLabel label = new JLabel(new ImageIcon(System.getProperty("user.dir") + "/src"+"output.png"));
 		String path = System.getProperty("user.dir") + "/src/output.png";
         File file = new File(path);
         BufferedImage image = ImageIO.read(file);
