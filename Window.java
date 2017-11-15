@@ -32,7 +32,7 @@ public class Window
     public static void run() throws IOException 
     {
         JFrame inputFrame = new JFrame();
-        inputFrame.setSize(550, 500);
+        inputFrame.setSize(550, 570);
         inputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         inputFrame.setLocation(450, 250);
 
@@ -48,7 +48,9 @@ public class Window
         JTextField textField3 = new JTextField();
         textField3.setPreferredSize(new Dimension(100, 25));
        
-        //JLabel label = new JLabel("Enter your data.");
+        JLabel label1 = new JLabel("Time: number of days to be graphed");
+        JLabel label2 = new JLabel("Beta: transmission parameter (rate of infection for susceptible-infected contact)");
+        JLabel label3 = new JLabel("Gamma: recovery parameter (rate of infected transitioning to recovered)");
         
         JLabel time = new JLabel("Time:");
         JLabel beta = new JLabel("Beta:");
@@ -87,7 +89,9 @@ public class Window
         container.add(gamma);
         container.add(textField3);
         container.add(okButton);
-        //container.add(label);
+        container.add(label1);
+        container.add(label2);
+        container.add(label3);
         container.add(modelequation);
 
         inputFrame.setVisible(true);
