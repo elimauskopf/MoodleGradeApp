@@ -1,8 +1,11 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Window 
@@ -26,10 +29,10 @@ public class Window
 		return var3; 
 	}
 	
-    public static void run() 
+    public static void run() throws IOException 
     {
         JFrame inputFrame = new JFrame();
-        inputFrame.setSize(400, 200);
+        inputFrame.setSize(550, 500);
         inputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         inputFrame.setLocation(450, 250);
 
@@ -45,7 +48,16 @@ public class Window
         JTextField textField3 = new JTextField();
         textField3.setPreferredSize(new Dimension(100, 25));
        
-        JLabel label = new JLabel("Enter your data.");
+        //JLabel label = new JLabel("Enter your data.");
+        
+        JLabel time = new JLabel("Time:");
+        JLabel beta = new JLabel("Beta:");
+        JLabel gamma = new JLabel("Gamma:");
+        
+        String path = System.getProperty("user.dir") + "/src/SIR_model-2.png";
+        File file = new File(path);
+        BufferedImage image = ImageIO.read(file);
+        JLabel modelequation = new JLabel(new ImageIcon(image));
 
         JButton okButton = new JButton("OK");
         okButton.addActionListener(new ActionListener() 
@@ -67,12 +79,16 @@ public class Window
             }
         }
         );
-
+        
+        container.add(time);
         container.add(textField1);
+        container.add(beta);
         container.add(textField2);
+        container.add(gamma);
         container.add(textField3);
         container.add(okButton);
-        container.add(label);
+        //container.add(label);
+        container.add(modelequation);
 
         inputFrame.setVisible(true);
     }
