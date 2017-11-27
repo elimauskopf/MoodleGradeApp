@@ -8,92 +8,104 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class Window 
-{
-	private static String var1; 
+public class Window {
+	private static String var1;
 	private static String var2;
-	private static String var3; 
+	private static String var3;
 
-	public static String getVar1()
-	{
-		return var1; 
+	public static String getVar1() {
+		return var1;
 	}
-	
-	public static String getVar2()
-	{
-		return var2; 
+
+	public static String getVar2() {
+		return var2;
 	}
-	
-	public static String getVar3()
-	{
-		return var3; 
+
+	public static String getVar3() {
+		return var3;
 	}
-	
-    public static void run() throws IOException 
-    {
-        JFrame inputFrame = new JFrame();
-        inputFrame.setSize(550, 570);
-        inputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        inputFrame.setLocation(450, 250);
 
-        Container container = inputFrame.getContentPane();
-        container.setLayout(new FlowLayout());
+	public static void run() throws IOException {
+		JFrame inputFrame = new JFrame();
+		inputFrame.setSize(550, 570);
+		inputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		inputFrame.setLocation(450, 250);
 
-        JTextField textField1 = new JTextField();
-        textField1.setPreferredSize(new Dimension(100, 25));
-        
-        JTextField textField2 = new JTextField();
-        textField2.setPreferredSize(new Dimension(100, 25));
-        
-        JTextField textField3 = new JTextField();
-        textField3.setPreferredSize(new Dimension(100, 25));
-       
-        JLabel label1 = new JLabel("Time: number of days to be graphed");
-        JLabel label2 = new JLabel("Beta: transmission parameter (rate of infection for susceptible-infected contact)");
-        JLabel label3 = new JLabel("Gamma: recovery parameter (rate of infected transitioning to recovered)");
-        
-        JLabel time = new JLabel("Time:");
-        JLabel beta = new JLabel("Beta:");
-        JLabel gamma = new JLabel("Gamma:");
-        
-        String path = System.getProperty("user.dir") + "/src/SIR_model-2.png";
-        File file = new File(path);
-        BufferedImage image = ImageIO.read(file);
-        JLabel modelequation = new JLabel(new ImageIcon(image));
+		Object[] options = { "Disease", "Fashion" };
+		int mode = JOptionPane.showOptionDialog(inputFrame, "Select Mode", "Select Mode", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
-        JButton okButton = new JButton("OK");
-        okButton.addActionListener(new ActionListener() 
-        {
-            public void actionPerformed(ActionEvent e) 
-            { 
-                var1 = textField1.getText();
-                var2 = textField2.getText(); 
-                var3 = textField3.getText(); 
-                try {
-					ImageToWindow.run(var1,var2,var3);
+		boolean fashion;
+		if (mode == JOptionPane.YES_OPTION) {
+			fashion = false;
+		} else {
+			fashion = true;
+		}
+
+		Container container = inputFrame.getContentPane();
+		container.setLayout(new FlowLayout());
+
+		JTextField textField1 = new JTextField();
+		textField1.setPreferredSize(new Dimension(100, 25));
+
+		JTextField textField2 = new JTextField();
+		textField2.setPreferredSize(new Dimension(100, 25));
+
+		JTextField textField3 = new JTextField();
+		textField3.setPreferredSize(new Dimension(100, 25));
+
+		JLabel label1 = new JLabel("Time: number of days to be graphed");
+		JLabel label2;
+		JLabel label3;
+
+		if (fashion == false) {
+			label2 = new JLabel("Beta: transmission parameter (rate of infection for susceptible-infected contact)");
+			label3 = new JLabel("Gamma: recovery parameter (rate of infected transitioning to recovered)");
+		} else {
+			label2 = new JLabel(
+					"Beta: transmission parameter (rate of adoption of the trend follower-nonfollower contact)");
+			label3 = new JLabel(
+					"Gamma: rervsion parameter (rate of trend followers transitioning away from the trend)");
+		}
+		JLabel time = new JLabel("Time:");
+		JLabel beta = new JLabel("Beta:");
+		JLabel gamma = new JLabel("Gamma:");
+
+		String path = System.getProperty("user.dir") + "/src/SIR_model-2.png";
+		File file = new File(path);
+		BufferedImage image = ImageIO.read(file);
+		JLabel modelequation = new JLabel(new ImageIcon(image));
+
+		JButton okButton = new JButton("OK");
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				var1 = textField1.getText();
+				var2 = textField2.getText();
+				var3 = textField3.getText();
+				try {
+					ImageToWindow.run(var1, var2, var3, fashion);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				} 
-            }
-        }
-        );
-        
-        container.add(time);
-        container.add(textField1);
-        container.add(beta);
-        container.add(textField2);
-        container.add(gamma);
-        container.add(textField3);
-        container.add(okButton);
-        container.add(label1);
-        container.add(label2);
-        container.add(label3);
-        container.add(modelequation);
+				}
+			}
+		});
 
-        inputFrame.setVisible(true);
-    }
+		container.add(time);
+		container.add(textField1);
+		container.add(beta);
+		container.add(textField2);
+		container.add(gamma);
+		container.add(textField3);
+		container.add(okButton);
+		container.add(label1);
+		container.add(label2);
+		container.add(label3);
+		container.add(modelequation);
+
+		inputFrame.setVisible(true);
+	}
 }
