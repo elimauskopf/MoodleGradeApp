@@ -30,7 +30,10 @@ public class Window {
 		inputFrame.setSize(550, 570);
 		inputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		inputFrame.setLocation(450, 250);
-
+		
+		UIManager.put("OptionPane.minimumSize",new Dimension(500,200)); 
+		UIManager.put("OptionPane.buttonFont",new Font("Arial", Font.PLAIN, 20));
+		UIManager.put("OptionPane.messageFont",new Font("Arial", Font.PLAIN, 20));
 		Object[] options = { "Disease", "Fashion" };
 		int mode = JOptionPane.showOptionDialog(inputFrame, "Select Mode", "Select Mode", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -85,10 +88,8 @@ public class Window {
 				try {
 					ImageToWindow.run(var1, var2, var3, fashion);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
