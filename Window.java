@@ -25,15 +25,23 @@ public class Window {
 		return var3;
 	}
 
+	private static JLabel createImage(String filename) throws IOException {
+		String path = System.getProperty("user.dir") + filename;
+		File file = new File(path);
+		BufferedImage image = ImageIO.read(file);
+		JLabel label = new JLabel(new ImageIcon(image));
+		return label;
+	}
+
 	public static void run() throws IOException {
 		JFrame inputFrame = new JFrame();
-		inputFrame.setSize(550, 570);
+		inputFrame.setSize(850, 700);
 		inputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		inputFrame.setLocation(450, 250);
-		
-		UIManager.put("OptionPane.minimumSize",new Dimension(500,200)); 
-		UIManager.put("OptionPane.buttonFont",new Font("Arial", Font.PLAIN, 20));
-		UIManager.put("OptionPane.messageFont",new Font("Arial", Font.PLAIN, 20));
+
+		UIManager.put("OptionPane.minimumSize", new Dimension(500, 200));
+		UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.PLAIN, 20));
+		UIManager.put("OptionPane.messageFont", new Font("Arial", Font.PLAIN, 20));
 		Object[] options = { "Disease", "Fashion" };
 		int mode = JOptionPane.showOptionDialog(inputFrame, "Select Mode", "Select Mode", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -57,27 +65,21 @@ public class Window {
 		JTextField textField3 = new JTextField();
 		textField3.setPreferredSize(new Dimension(100, 25));
 
-		JLabel label1 = new JLabel("Time: number of days to be graphed");
-		JLabel label2;
-		JLabel label3;
+		JLabel labeldisease = createImage("/src/beta_gamma-1.png");
+		JLabel labelfashion = createImage("/src/fashionBeta.png");
 
+		JLabel label;
 		if (fashion == false) {
-			label2 = new JLabel("Beta: transmission parameter (rate of infection for susceptible-infected contact)");
-			label3 = new JLabel("Gamma: recovery parameter (rate of infected transitioning to recovered)");
+			label = labeldisease;
 		} else {
-			label2 = new JLabel(
-					"Beta: transmission parameter (rate of adoption of the trend follower-nonfollower contact)");
-			label3 = new JLabel(
-					"Gamma: rervsion parameter (rate of trend followers transitioning away from the trend)");
+			label = labelfashion;
 		}
-		JLabel time = new JLabel("Time:");
-		JLabel beta = new JLabel("Beta:");
-		JLabel gamma = new JLabel("Gamma:");
 
-		String path = System.getProperty("user.dir") + "/src/SIR_model-2.png";
-		File file = new File(path);
-		BufferedImage image = ImageIO.read(file);
-		JLabel modelequation = new JLabel(new ImageIcon(image));
+		JLabel time = createImage("/src/T.png");
+		JLabel beta = createImage("/src/Beta.png");
+		JLabel gamma = createImage("/src/Gamma.png");
+
+		JLabel modelequation = createImage("/src/SIR_model-2.png");
 
 		JButton okButton = new JButton("OK");
 		okButton.addActionListener(new ActionListener() {
@@ -102,9 +104,7 @@ public class Window {
 		container.add(gamma);
 		container.add(textField3);
 		container.add(okButton);
-		container.add(label1);
-		container.add(label2);
-		container.add(label3);
+		container.add(label);
 		container.add(modelequation);
 
 		inputFrame.setVisible(true);
