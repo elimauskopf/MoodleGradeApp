@@ -79,7 +79,7 @@ public class Window {
 		JLabel beta = createImage("/src/Beta.png");
 		JLabel gamma = createImage("/src/Gamma.png");
 
-		JLabel modelequation = createImage("/src/SIR_model-2.png");
+		JLabel modelequation = createImage("/src/SIRmodelfixed.png");
 
 		JButton okButton = new JButton("OK");
 		okButton.addActionListener(new ActionListener() {
